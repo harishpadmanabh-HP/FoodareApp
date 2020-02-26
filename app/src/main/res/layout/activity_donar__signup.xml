@@ -1,9 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".donator.Donar_Signup">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363"
+        app:srcCompat="@drawable/donator" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.19"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/nunito"
+        android:text="Join to Feed The Needy"
+        android:textColor="#000"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.24" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintVertical_bias="0.242">
+
+        <EditText
+            android:id="@+id/d_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/edtround"
+            android:drawableLeft="@drawable/ic_account_box_black_24dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:maxEms="10"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#D8D1D1"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/d_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/edtround"
+            android:drawableLeft="@drawable/ic_email_black_24dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#D8D1D1"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/d_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/edtround"
+            android:drawableLeft="@drawable/ic_phone_black_24dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito"
+            android:hint="Phone"
+            android:inputType="phone"
+            android:maxEms="10"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#D8D1D1"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/d_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/edtround"
+            android:drawableLeft="@drawable/ic_location_on_black_24dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito"
+            android:hint="Location"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#D8D1D1"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/d_city"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/edtround"
+            android:drawableLeft="@drawable/ic_location_on_black_24dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito"
+            android:hint="City"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#D8D1D1"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/d_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/edtround"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#D8D1D1"
+            android:textSize="20dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/d_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="20dp"
+            android:backgroundTint="#fff"
+            android:fontFamily="@font/nunito"
+            android:text="Sign up"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10948905"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

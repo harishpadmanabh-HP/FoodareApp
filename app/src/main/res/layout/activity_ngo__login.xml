@@ -3,7 +3,155 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#fff"
     android:layout_height="match_parent"
-    tools:context=".ngo.NGO_Login">
+    tools:context=".donator.Donar_Login">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.18203309"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:transitionName="simple_activity_transition_ngo"
+        tools:ignore="UnusedAttribute"
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.73"
+        app:srcCompat="@drawable/ngo" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/nunito"
+        android:text="Hi ,"
+        android:textColor="#000"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintVertical_bias="0.526" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/raleway"
+        android:text="NGO Agent"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <LinearLayout
+        android:background="#fff"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline6">
+
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/edtround"
+            android:drawableLeft="@drawable/ic_phone_black_24dp"
+            android:drawablePadding="15dp"
+            android:maxLines="1"
+            android:maxLength="10"
+            android:maxEms="10"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito"
+            android:hint="Phone"
+            android:padding="18dp"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:inputType="phone"
+            android:translationZ="30dp" />
+
+        <EditText
+            android:id="@+id/pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/edtround"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:drawablePadding="15dp"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito"
+            android:hint="Password"
+            android:maxLines="1"
+            android:maxLength="10"
+            android:maxEms="10"
+            android:padding="18dp"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:inputType="textPassword"
+            android:translationZ="30dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/login"
+            android:layout_width="128dp"
+            android:layout_height="73dp"
+            android:layout_gravity="right"
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/monsterregular"
+            android:text="Login"
+
+            android:textAlignment="center"
+            android:textColor="#FDFDFD"
+            android:textSize="20dp"
+            android:translationZ="30dp"
+            app:cornerRadius="30dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signup"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/ptsans"
+            android:text="New User ? Sign up here"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18dp" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

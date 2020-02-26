@@ -60,11 +60,10 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/monsterregular"
         android:text="Choose any one "
-        android:textColor="#7E7777"
+        android:textColor="#B9B7B7"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.333" />
@@ -91,6 +90,8 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2">
 
         <ImageView
+            android:transitionName="simple_activity_transition"
+            tools:ignore="UnusedAttribute"
             android:id="@+id/donator_img"
             android:layout_width="125dp"
             android:layout_height="125dp"
@@ -103,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/monsterregular"
-            android:text="Donator"
+            android:text="Donor"
             android:textColor="#000"
             android:textSize="25dp"
 
@@ -136,6 +137,8 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2">
 
         <ImageView
+            android:transitionName="simple_activity_transition_ngo"
+
             android:id="@+id/ngo_img"
             android:layout_width="125dp"
             android:layout_height="125dp"
