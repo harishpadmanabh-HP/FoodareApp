@@ -44,7 +44,6 @@ public class Food_List_Adapter extends RecyclerView.Adapter<Food_List_Adapter.Fo
         holder.foodadd.setVisibility(View.GONE);
         holder.foodcity.setVisibility(View.GONE);
         holder.buy.setVisibility(View.GONE);
-        holder.stepperTouch.setVisibility(View.GONE);
 
 
 
@@ -61,6 +60,9 @@ public class Food_List_Adapter extends RecyclerView.Adapter<Food_List_Adapter.Fo
         holder.foodtype.setText(food_list_model.getFood().get(position).getFood_type());
 
 
+        holder.stepperTouch.stepper.setMin(0);
+
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +71,6 @@ public class Food_List_Adapter extends RecyclerView.Adapter<Food_List_Adapter.Fo
                 holder.foodadd.setVisibility(View.VISIBLE);
                 holder.foodcity.setVisibility(View.VISIBLE);
                 holder.buy.setVisibility(View.VISIBLE);
-                holder.stepperTouch.setVisibility(View.VISIBLE);
 
             }
         });
@@ -86,6 +87,7 @@ public class Food_List_Adapter extends RecyclerView.Adapter<Food_List_Adapter.Fo
         ImageView foodimage;
         TextView foodname,foodtype,foodquant,foodadd,foodcity;
         StepperTouch stepperTouch;
+
         Button buy;
 
 
@@ -98,8 +100,8 @@ public class Food_List_Adapter extends RecyclerView.Adapter<Food_List_Adapter.Fo
             foodquant=itemView.findViewById(R.id.singlefoodquantity);
             foodadd=itemView.findViewById(R.id.singlefoodadd);
             foodcity=itemView.findViewById(R.id.singlefoodcity);
-            stepperTouch=itemView.findViewById(R.id.stepperTouch);
             buy=itemView.findViewById(R.id.addbtn);
+            stepperTouch=itemView.findViewById(R.id.stepperTouch);
 
 
         }
