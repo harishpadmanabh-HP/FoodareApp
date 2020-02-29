@@ -3,6 +3,7 @@ package com.hp.foodareapp.Retrofit;
 import com.hp.foodareapp.donator.Models.Donar_Reg_Model;
 import com.hp.foodareapp.donator.Models.Donar_login_Model;
 import com.hp.foodareapp.ngo.Models.CityModel;
+import com.hp.foodareapp.ngo.Models.Food_list_Model;
 import com.hp.foodareapp.ngo.Models.NGO_Login_MOdel;
 import com.hp.foodareapp.ngo.Models.NGO_Reg_Model;
 import com.hp.foodareapp.ngo.NGO_Login;
@@ -51,4 +52,7 @@ public interface Apis {
     @GET("district_view.php?")
     Call<CityModel> CITY_MODEL_CALL(@Query("district") String district );
 
+@FormUrlEncoded
+    @POST("view_food_city.php?")
+    Call<Food_list_Model> FOOD_LIST_MODEL_CALL(@Field("city") String city);
 }

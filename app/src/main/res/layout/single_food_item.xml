@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:elevation="30dp"
+    android:translationZ="30dp"
+    android:animateLayoutChanges="true"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff">
+
+    <ImageView
+        android:id="@+id/singlefoodimage"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+         />
+
+    <TextView
+        android:id="@+id/singlefoodname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:fontFamily="@font/nunito"
+        android:text="Food Name"
+        android:textColor="#000"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/singlefoodquantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/nunito"
+        android:text="Food Quantity"
+        android:textColor="#000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/singlefoodtype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nunito"
+        android:text="Food type"
+        android:textColor="#000"
+        android:textSize="20dp" />
+    <TextView
+        android:id="@+id/singlefoodadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food Add"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/nunito"/>
+    <TextView
+        android:id="@+id/singlefoodcity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food City"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/nunito"/>
+
+    <nl.dionsegijn.steppertouch.StepperTouch
+        android:id="@+id/stepperTouch"
+        android:layout_gravity="right"
+
+        android:layout_margin="17dp"
+        android:layout_width="150dp"
+        android:layout_height="40dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addbtn"
+        android:translationZ="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BUY FOOD"
+        android:textSize="20dp"
+        android:padding="15dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        app:cornerRadius="30dp"
+        />
+
+</LinearLayout>
