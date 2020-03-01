@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shrine"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ngo.Food_Details"></activity>
         <activity android:name=".ngo.FoodList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +24,7 @@
         <activity android:name=".ngo.NGO_Login" />
         <activity android:name=".donator.Donar_Signup" />
         <activity android:name=".donator.Donar_Login" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

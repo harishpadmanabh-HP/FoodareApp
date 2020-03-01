@@ -1,6 +1,9 @@
 package com.hp.foodareapp.ngo.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +14,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
+import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.harishpadmanabh.apppreferences.AppPreferences;
+import com.hp.foodareapp.MainActivity;
 import com.hp.foodareapp.R;
+import com.hp.foodareapp.donator.Donar_Login;
+import com.hp.foodareapp.ngo.Food_Details;
 import com.hp.foodareapp.ngo.Models.Food_list_Model;
 
+import nl.dionsegijn.steppertouch.OnStepCallback;
 import nl.dionsegijn.steppertouch.StepperTouch;
 
 public class Food_List_Adapter extends RecyclerView.Adapter<Food_List_Adapter.FoodVH> {
+    private AppPreferences appPreferences;
+
     public Food_List_Adapter(Food_list_Model food_list_model, Context context) {
         this.food_list_model = food_list_model;
         this.context = context;
@@ -32,49 +52,56 @@ public class Food_List_Adapter extends RecyclerView.Adapter<Food_List_Adapter.Fo
     @NonNull
     @Override
     public FoodVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view =LayoutInflater.from(parent.getContext()).inflate(R.layout.single_food_item, parent, false);
+        View searchview=LayoutInflater.from(parent.getContext()).inflate(R.layout.singlesearchitem, parent, false);
+        appPreferences = AppPreferences.getInstance(context,context.getApplicationContext(). getResources().getString(R.string.app_name));
 
-        return new FoodVH(view);
+        return new FoodVH(searchview);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FoodVH holder, int position) {
-
-        holder.foodtype.setVisibility(View.GONE);
-        holder.foodadd.setVisibility(View.GONE);
-        holder.foodcity.setVisibility(View.GONE);
-        holder.buy.setVisibility(View.GONE);
-
-
-
-        Glide
-                .with(context)
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .priority(Priority.HIGH);
+        Glide.with(context)
+                .asBitmap()
                 .load(food_list_model.getFood().get(position).getImage())
-             //   .centerCrop()
-             //   .placeholder(R.drawable.loading_spinner)
-                .into(holder.foodimage);
-        holder.foodname.setText(food_list_model.getFood().get(position).getFood_name());
-        holder.foodadd.setText(food_list_model.getFood().get(position).getAddress());
-        holder.foodcity.setText(food_list_model.getFood().get(position).getCity());
-        holder.foodquant.setText(food_list_model.getFood().get(position).getQuantity());
-        holder.foodtype.setText(food_list_model.getFood().get(position).getFood_type());
+                // .load(BASE_POSTER_PATH+model.getPoster_path().trim())
+                .apply(options)
+                .into(new BitmapImageViewTarget(holder.mealimg) {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, @Nullable Transition<? super Bitmap> transition) {
+                        super.onResourceReady(bitmap, transition);
+                        Palette.from(bitmap).generate(palette -> setBackgroundColor(palette, holder));
+                    }
+                });
 
+        holder.mealname.setText(food_list_model.getFood().get(position).getFood_name());
+        holder.mealname.setPadding(10,0,0,0);
+        holder.itemView.setOnClickListener(v -> {
 
-        holder.stepperTouch.stepper.setMin(0);
+            appPreferences.saveData("foodname",food_list_model.getFood().get(position).getFood_name());
+            appPreferences.saveData("foodtype",food_list_model.getFood().get(position).getFood_type());
+            appPreferences.saveData("foodquantity",food_list_model.getFood().get(position).getQuantity());
+            appPreferences.saveData("foodadd",food_list_model.getFood().get(position).getAddress());
+            appPreferences.saveData("foodcity",food_list_model.getFood().get(position).getCity());
+            appPreferences.saveData("foodimg",food_list_model.getFood().get(position).getImage());
 
+            Intent intent = new Intent(context, Food_Details.class);
+            ActivityOptionsCompat optionsw = ActivityOptionsCompat.
+                    makeSceneTransitionAnimation((Activity) context,
+                            holder.mealimg,
+                            ViewCompat.getTransitionName(holder.mealimg));
+            context.startActivity(intent, optionsw.toBundle());
 
+           // context.startActivity(new Intent(context, Food_Details.class));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.foodtype.setVisibility(View.VISIBLE);
-                holder.foodadd.setVisibility(View.VISIBLE);
-                holder.foodcity.setVisibility(View.VISIBLE);
-                holder.buy.setVisibility(View.VISIBLE);
-
-            }
         });
-
+          }
+    private void setBackgroundColor(Palette palette, FoodVH holder ) {
+        holder.mealname.setBackgroundColor(palette.getVibrantColor(context
+                .getResources().getColor(R.color.black_translucent_60)));
     }
 
     @Override
@@ -84,24 +111,15 @@ public class Food_List_Adapter extends RecyclerView.Adapter<Food_List_Adapter.Fo
 
     class FoodVH extends RecyclerView.ViewHolder{
 
-        ImageView foodimage;
-        TextView foodname,foodtype,foodquant,foodadd,foodcity;
-        StepperTouch stepperTouch;
-
-        Button buy;
-
+        ImageView mealimg;
+        TextView mealname;
 
         public FoodVH(@NonNull View itemView) {
             super(itemView);
 
-            foodimage=itemView.findViewById(R.id.singlefoodimage);
-            foodname=itemView.findViewById(R.id.singlefoodname);
-            foodtype=itemView.findViewById(R.id.singlefoodtype);
-            foodquant=itemView.findViewById(R.id.singlefoodquantity);
-            foodadd=itemView.findViewById(R.id.singlefoodadd);
-            foodcity=itemView.findViewById(R.id.singlefoodcity);
-            buy=itemView.findViewById(R.id.addbtn);
-            stepperTouch=itemView.findViewById(R.id.stepperTouch);
+            mealimg=itemView.findViewById(R.id.searchresult_img);
+            mealname=itemView.findViewById(R.id.searchresult_name);
+
 
 
         }
