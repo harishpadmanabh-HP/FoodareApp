@@ -6,15 +6,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.hp.foodareapp.R;
 import com.hp.foodareapp.Retrofit.Retro;
 import com.hp.foodareapp.ngo.Adapters.Food_List_Adapter;
 import com.hp.foodareapp.ngo.Models.Food_list_Model;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +28,8 @@ public class FoodList extends AppCompatActivity {
     private AppCompatAutoCompleteTextView district;
     private RecyclerView foodlist;
     private Food_list_Model food_list_model;
+    private  ArrayList<String> cities;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +37,21 @@ public class FoodList extends AppCompatActivity {
 
         initViews();
 
+        cities=new ArrayList<>();
+        cities.add("Thiruvananthapuram");
+        cities.add("Kanyakumari");
+
+        ArrayAdapter<String> d_adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item,cities);
+        district.setThreshold(1);//will start working from first character
+        district.setAdapter(d_adapter);//setting the adapter data into the AutoCompleteTextView
+        district.setTextColor(Color.WHITE);
+
        district.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
+               Toast.makeText(FoodList.this, "You have selected "+cities.get(position), Toast.LENGTH_SHORT).show();
 
            }
        });

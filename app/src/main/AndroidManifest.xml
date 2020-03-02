@@ -14,17 +14,19 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ngo.Food_Details"></activity>
         <activity android:name=".ngo.FoodList">
+
+        </activity>
+        <activity android:name=".ngo.NGO_Signup" />
+        <activity android:name=".ngo.NGO_Login" />
+        <activity android:name=".donator.Donar_Signup" />
+        <activity android:name=".donator.Donar_Login" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ngo.NGO_Signup" />
-        <activity android:name=".ngo.NGO_Login" />
-        <activity android:name=".donator.Donar_Signup" />
-        <activity android:name=".donator.Donar_Login" />
-        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

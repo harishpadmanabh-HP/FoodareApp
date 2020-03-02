@@ -30,15 +30,15 @@
         app:layout_constraintGuide_percent="0.11354309" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="358dp"
         android:layout_height="60dp"
-        android:backgroundTint="#F1A637"
-        android:hint="District"
+        app:hintTextColor="#fff"
+        android:hint=""
         app:boxStrokeColor="@color/edtBlue"
         app:endIconDrawable="@drawable/ic_arrow_drop_down_circle_black_24dp"
         app:endIconMode="dropdown_menu"
-        app:endIconTint="@color/colorPrimaryDark"
+        app:endIconTint="@color/edtBlue"
         app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,10 +47,13 @@
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/district"
+            android:background="#F7B15F"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPostalAddress"
-
+            android:textColor="#fff"
+            android:hint="Location"
+            android:textColorHint="#fff"
             android:maxLines="1"
             android:paddingStart="15dp" />
 
