@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.harishpadmanabh.apppreferences.AppPreferences;
 import com.hp.foodareapp.R;
 import com.hp.foodareapp.Retrofit.Retro;
 import com.hp.foodareapp.ngo.Models.NGO_Login_MOdel;
@@ -24,12 +25,19 @@ public class NGO_Login extends AppCompatActivity {
     private EditText pass;
     private MaterialButton login;
     private MaterialButton signup;
+    private AppPreferences appPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ngo__login);
         initView();
+        appPreferences = AppPreferences.getInstance(this, getResources().getString(R.string.app_name));
+
+        //............dummy creds
+        phone.setText("9400880421");
+        pass.setText("qwerty");
+        //............dummy creds
 
         signup.setOnClickListener(view -> {
 
@@ -45,6 +53,10 @@ public class NGO_Login extends AppCompatActivity {
                     public void onResponse(Call<NGO_Login_MOdel> call, Response<NGO_Login_MOdel> response) {
                         NGO_Login_MOdel ngo_login_mOdel = response.body();
                         if (ngo_login_mOdel.getStatus().equalsIgnoreCase("success")) {
+
+                            appPreferences.saveData("ngo_id",ngo_login_mOdel.getUser_data().getNgo_id());
+
+
                             Toast.makeText(NGO_Login.this, "Success", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(NGO_Login.this, FoodList.class));
                         } else {

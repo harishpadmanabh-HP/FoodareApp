@@ -87,15 +87,16 @@ public class Food_List_Adapter extends RecyclerView.Adapter<Food_List_Adapter.Fo
             appPreferences.saveData("foodadd",food_list_model.getFood().get(position).getAddress());
             appPreferences.saveData("foodcity",food_list_model.getFood().get(position).getCity());
             appPreferences.saveData("foodimg",food_list_model.getFood().get(position).getImage());
+            appPreferences.saveData("food_id",food_list_model.getFood().get(position).getFood_id());
 
             Intent intent = new Intent(context, Food_Details.class);
-            ActivityOptionsCompat optionsw = ActivityOptionsCompat.
-                    makeSceneTransitionAnimation((Activity) context,
-                            holder.mealimg,
-                            ViewCompat.getTransitionName(holder.mealimg));
-            context.startActivity(intent, optionsw.toBundle());
+//            ActivityOptionsCompat optionsw = ActivityOptionsCompat.
+//                    makeSceneTransitionAnimation((Activity) context,
+//                            holder.mealimg,
+//                            ViewCompat.getTransitionName(holder.mealimg));
+//            context.startActivity(intent, optionsw.toBundle());
 
-           // context.startActivity(new Intent(context, Food_Details.class));
+            context.startActivity(new Intent(context, Food_Details.class));
 
         });
           }

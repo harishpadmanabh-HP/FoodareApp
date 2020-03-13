@@ -2,6 +2,7 @@ package com.hp.foodareapp.Retrofit;
 
 import com.hp.foodareapp.donator.Models.Donar_Reg_Model;
 import com.hp.foodareapp.donator.Models.Donar_login_Model;
+import com.hp.foodareapp.ngo.Models.BuyFood_model;
 import com.hp.foodareapp.ngo.Models.CityModel;
 import com.hp.foodareapp.ngo.Models.Food_list_Model;
 import com.hp.foodareapp.ngo.Models.NGO_Login_MOdel;
@@ -21,6 +22,7 @@ public interface Apis {
     @POST("donor_login.php")
     Call<Donar_login_Model> DONAR_LOGIN_MODEL_CALL(@Field("phone") String phone,
                                                    @Field("password") String password);
+
     @FormUrlEncoded
     @POST("donor_reg.php?")
     Call<Donar_Reg_Model> DONAR_REG_MODEL_CALL(@Field("name") String name,
@@ -31,10 +33,9 @@ public interface Apis {
                                                @Field("password") String password);
 
 
-    @FormUrlEncoded
-    @POST("ngo_login.php")
-    Call<NGO_Login_MOdel>NGO_LOGIN_CALL(@Field("phone") String phone,
-                                        @Field("password") String password);
+    @GET("ngo_login.php")
+    Call<NGO_Login_MOdel> NGO_LOGIN_CALL(@Query("phone") String phone,
+                                         @Query("password") String password);
 
     @FormUrlEncoded
     @POST("ngo_reg.php")
@@ -47,12 +48,15 @@ public interface Apis {
                                            @Field("password") String password);
 
 
-
-
     @GET("district_view.php?")
-    Call<CityModel> CITY_MODEL_CALL(@Query("district") String district );
+    Call<CityModel> CITY_MODEL_CALL(@Query("district") String district);
 
-@FormUrlEncoded
+    @FormUrlEncoded
     @POST("view_food_city.php?")
     Call<Food_list_Model> FOOD_LIST_MODEL_CALL(@Field("city") String city);
+
+    @GET("buy_food.php?")
+    Call<BuyFood_model> BUY_FOOD_MODEL_CALL(@Query("ngo_id") String ngo_id,
+                                            @Query("food_id") String food_id,
+                                            @Query("qtity") String qtity);
 }
