@@ -59,4 +59,6 @@ public interface Apis {
     Call<BuyFood_model> BUY_FOOD_MODEL_CALL(@Query("ngo_id") String ngo_id,
                                             @Query("food_id") String food_id,
                                             @Query("qtity") String qtity);
+
+
 }
