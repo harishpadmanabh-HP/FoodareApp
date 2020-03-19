@@ -35,8 +35,8 @@ public class NGO_Login extends AppCompatActivity {
         appPreferences = AppPreferences.getInstance(this, getResources().getString(R.string.app_name));
 
         //............dummy creds
-        phone.setText("9400880421");
-        pass.setText("qwerty");
+       // phone.setText("9400880421");
+       // pass.setText("qwerty");
         //............dummy creds
 
         signup.setOnClickListener(view -> {
