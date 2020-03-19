@@ -37,6 +37,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import dmax.dialog.SpotsDialog;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -59,6 +60,7 @@ public class AddFood extends AppCompatActivity {
     private String pictureFilePath;
     MultipartBody.Part filePart;
     private AppPreferences appPreferences;
+    private android.app.AlertDialog pd;
 
 
     @Override
@@ -69,6 +71,7 @@ public class AddFood extends AppCompatActivity {
         View rootView = findViewById(android.R.id.content);
         isPhototaken=false;
         appPreferences = AppPreferences.getInstance(this, getResources().getString(R.string.app_name));
+        pd = new SpotsDialog(AddFood.this, R.style.CustomAlert);
 
 
         //conecting all TextInputEditText as list
@@ -84,6 +87,7 @@ public class AddFood extends AppCompatActivity {
         city.setTextColor(Color.BLACK);
 
         addfood.setOnClickListener(v -> {
+
             Log.e("PHOTO TAKEN", String.valueOf(isPhototaken));
 
             //checking null values for each edittesxt
@@ -100,6 +104,8 @@ public class AddFood extends AppCompatActivity {
             }
 
             if (noErrors && isPhototaken) {
+
+                pd.show();
 
                 Log.e("PHOTO TAKEN inside", String.valueOf(isPhototaken));
                 RequestBody idBody = RequestBody.create(MediaType.parse("text/plain"), appPreferences.getData("donar_id"));
@@ -125,10 +131,12 @@ public class AddFood extends AppCompatActivity {
                         {
                             Toast.makeText(AddFood.this, "Food Added Successfully", Toast.LENGTH_SHORT).show();
 
+                            pd.dismiss();
                             startActivity(new Intent(AddFood.this,DonarHome.class));
 
                         }else
                             {
+                                pd.dismiss();
                                 Toast.makeText(AddFood.this, "Food cant be Added ", Toast.LENGTH_SHORT).show();
 
                             }
@@ -136,10 +144,15 @@ public class AddFood extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<AddFoodModel> call, Throwable t) {
+                       pd.dismiss();
                         Toast.makeText(AddFood.this, " Add food model fail "+t, Toast.LENGTH_SHORT).show();
                     }
                 });
 
+            }else
+            {
+                pd.dismiss();
+                Toast.makeText(this, "All data are compulsory", Toast.LENGTH_SHORT).show();
             }
 
         });
