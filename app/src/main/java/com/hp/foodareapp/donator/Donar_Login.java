@@ -45,7 +45,16 @@ public class Donar_Login extends AppCompatActivity {
 
                          Donar_login_Model donar_login_model=response.body();
                          Toast.makeText(Donar_Login.this, "Success", Toast.LENGTH_SHORT).show();
+                             if(donar_login_model.getStatus().equalsIgnoreCase("success"))
+                             {
+                                     appPreferences.saveData("donar_id",donar_login_model.getUser_data().getDonor_id());
 
+                                     startActivity(new Intent(Donar_Login.this,DonarHome.class));
+
+                             }else
+                             {
+                                 Toast.makeText(Donar_Login.this, ""+donar_login_model.getStatus(), Toast.LENGTH_SHORT).show();
+                             }
 
                     }
 

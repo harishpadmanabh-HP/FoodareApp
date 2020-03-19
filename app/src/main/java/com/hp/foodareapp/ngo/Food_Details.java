@@ -2,6 +2,7 @@ package com.hp.foodareapp.ngo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.harishpadmanabh.apppreferences.AppPreferences;
 import com.hp.foodareapp.R;
 import com.hp.foodareapp.Retrofit.Retro;
 import com.hp.foodareapp.ngo.Models.BuyFood_model;
+import com.hp.foodareapp.ngo.Models.DonarDetailsModel;
 
 import nl.dionsegijn.steppertouch.StepperTouch;
 import retrofit2.Call;
@@ -74,16 +76,48 @@ public class Food_Details extends AppCompatActivity {
             {
 
 
-                new Retro().getApi().BUY_FOOD_MODEL_CALL(appPreferences.getData("ngo_id"),
-                                                         appPreferences.getData("user_id"),
-                                                          quantity.getText().toString()).enqueue(new Callback<BuyFood_model>() {
+                String ngo_id =appPreferences.getData("ngo_id");
+                String food_id=appPreferences.getData("food_id");
+                String quant=quantity.getText().toString();
+                String doanr_id=appPreferences.getData("donar_id");
+
+
+                new Retro().getApi().BUY_FOOD_MODEL_CALL(ngo_id,
+                                                      food_id,
+                                                          quant).enqueue(new Callback<BuyFood_model>() {
                     @Override
                     public void onResponse(Call<BuyFood_model> call, Response<BuyFood_model> response) {
                         BuyFood_model buyFood_model=response.body();
                         if(buyFood_model.getStatus().equalsIgnoreCase("success")){
                             Toast.makeText(Food_Details.this, "Request Successfull. You can collect food .", Toast.LENGTH_LONG).show();
 
+                            new Retro().getApi().donarDetailsCall(doanr_id).enqueue(new Callback<DonarDetailsModel>() {
+                                @Override
+                                public void onResponse(Call<DonarDetailsModel> call, Response<DonarDetailsModel> response) {
+
+                                    DonarDetailsModel donarDetailsModel=response.body();
+                                    if(donarDetailsModel.getStatus().equalsIgnoreCase("success"))
+                                    {
+                                        SmsManager smsManager = SmsManager.getDefault();
+                                        smsManager.sendTextMessage(donarDetailsModel.getDonor_Details().get(0).getPhone(), null, "Your Food "+ appPreferences.getData("foodname")+" "+quant+" no:s has been requested for donation by the sender of this sms.", null, null);
+
+                                    }else
+                                    {
+                                        Toast.makeText(Food_Details.this, "User details not found.", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<DonarDetailsModel> call, Throwable t) {
+
+                                }
+                            });
+
+
+
                             startActivity(new Intent(Food_Details.this,FoodList.class));
+
                         }else
                         {
                             Toast.makeText(Food_Details.this, "Some thing went wrong . Try again later", Toast.LENGTH_LONG).show();

@@ -22,9 +22,12 @@ import androidx.core.content.FileProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.harishpadmanabh.apppreferences.AppPreferences;
 import com.hp.foodareapp.BuildConfig;
 import com.hp.foodareapp.R;
+import com.hp.foodareapp.Retrofit.Retro;
 import com.hp.foodareapp.Utils.Utils;
+import com.hp.foodareapp.donator.Models.AddFoodModel;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +37,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddFood extends AppCompatActivity {
 
@@ -50,6 +58,7 @@ public class AddFood extends AppCompatActivity {
     private boolean isPhototaken;
     private String pictureFilePath;
     MultipartBody.Part filePart;
+    private AppPreferences appPreferences;
 
 
     @Override
@@ -59,6 +68,8 @@ public class AddFood extends AppCompatActivity {
         initView();
         View rootView = findViewById(android.R.id.content);
         isPhototaken=false;
+        appPreferences = AppPreferences.getInstance(this, getResources().getString(R.string.app_name));
+
 
         //conecting all TextInputEditText as list
         final List<TextInputEditText> textInputEditTexts = Utils.findViewsWithType(
@@ -73,6 +84,7 @@ public class AddFood extends AppCompatActivity {
         city.setTextColor(Color.BLACK);
 
         addfood.setOnClickListener(v -> {
+            Log.e("PHOTO TAKEN", String.valueOf(isPhototaken));
 
             //checking null values for each edittesxt
             boolean noErrors = true;
@@ -87,7 +99,46 @@ public class AddFood extends AppCompatActivity {
                 }
             }
 
-            if (noErrors) {
+            if (noErrors && isPhototaken) {
+
+                Log.e("PHOTO TAKEN inside", String.valueOf(isPhototaken));
+                RequestBody idBody = RequestBody.create(MediaType.parse("text/plain"), appPreferences.getData("donar_id"));
+                RequestBody fcityBody = RequestBody.create(MediaType.parse("text/plain"), city.getText().toString());
+
+                RequestBody fnameBody = RequestBody.create(MediaType.parse("text/plain"), foodname.getText().toString());
+                RequestBody ftypeBody = RequestBody.create(MediaType.parse("text/plain"), foodtype.getText().toString());
+                RequestBody fquantityBody = RequestBody.create(MediaType.parse("text/plain"), foodquantity.getText().toString());
+                RequestBody faddBody = RequestBody.create(MediaType.parse("text/plain"), foodadd.getText().toString());
+                try {
+                    filePart = MultipartBody.Part.createFormData("avatar", imgFile.getName(), RequestBody.create(MediaType.parse("image/*"), imgFile));
+
+                }catch (Exception e)
+                {
+                    Toast.makeText(getApplicationContext(), "No image  file ", Toast.LENGTH_SHORT).show();
+                }
+
+                new Retro().getApi().ADD_FOOD_MODEL_CALL(idBody,fnameBody,ftypeBody,fquantityBody,faddBody,fcityBody,filePart).enqueue(new Callback<AddFoodModel>() {
+                    @Override
+                    public void onResponse(Call<AddFoodModel> call, Response<AddFoodModel> response) {
+                        AddFoodModel addFoodModel =response.body();
+                        if(addFoodModel.getStatus().equalsIgnoreCase("success"))
+                        {
+                            Toast.makeText(AddFood.this, "Food Added Successfully", Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(AddFood.this,DonarHome.class));
+
+                        }else
+                            {
+                                Toast.makeText(AddFood.this, "Food cant be Added ", Toast.LENGTH_SHORT).show();
+
+                            }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddFoodModel> call, Throwable t) {
+                        Toast.makeText(AddFood.this, " Add food model fail "+t, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
 
@@ -110,7 +161,7 @@ public class AddFood extends AppCompatActivity {
     private void selectImage() {
 
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddFood.this);
         builder.setTitle("Add Photo!");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override

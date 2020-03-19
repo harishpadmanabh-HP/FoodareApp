@@ -72,6 +72,22 @@ public class FoodList extends AppCompatActivity {
 
            }
        });
+        new Retro().getApi().FOOD_LIST_MODEL_CALL("Thiruvananthapuram").enqueue(new Callback<Food_list_Model>() {
+            @Override
+            public void onResponse(Call<Food_list_Model> call, Response<Food_list_Model> response) {
+                food_list_model=response.body();
+                foodlist.setLayoutManager(new GridLayoutManager(FoodList.this,2));
+
+                foodlist.setAdapter(new Food_List_Adapter(food_list_model,FoodList.this));
+            }
+
+            @Override
+            public void onFailure(Call<Food_list_Model> call, Throwable t) {
+
+                Toast.makeText(FoodList.this, "API FAILURE "+t, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
 

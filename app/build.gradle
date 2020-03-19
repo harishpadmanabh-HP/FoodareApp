@@ -44,6 +44,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.DanielMartinus:Stepper-Touch:0.6'
     implementation 'androidx.palette:palette:1.0.0'
+    // Dexter runtime permissions
+    implementation 'com.karumi:dexter:4.2.0'
 
 
 }
